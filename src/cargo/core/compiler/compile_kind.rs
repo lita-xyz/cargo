@@ -71,7 +71,7 @@ impl CompileKind {
         }
 
         let kinds = match &gctx.build_config()?.target {
-            None => Ok(vec![CompileKind::Host]),
+            None => Ok(vec![CompileKind::Target(CompileTarget::new("valida-unknown-baremetal-gnu")?)]),
             Some(build_target_config) => dedup(&build_target_config.values(gctx)?),
         };
 

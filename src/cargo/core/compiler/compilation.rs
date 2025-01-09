@@ -477,12 +477,18 @@ fn target_runner(
             runner.definition
         );
     }
-    Ok(matching_runner.map(|(_k, runner)| {
+    if let Some(v) = matching_runner.map(|(_k, runner)| {
         (
             runner.val.path.clone().resolve_program(bcx.gctx),
             runner.val.args.clone(),
         )
-    }))
+    }) {
+        return Ok(Some(v))
+    }
+    if target.starts_with("valida") {
+        return Ok(Some((PathBuf::from("/valida-toolchain/valida-runner.sh"), vec![])))
+    }
+    return Ok(None)
 }
 
 /// Gets the user-specified linker for a particular host or target from the configuration.
@@ -518,5 +524,11 @@ fn target_linker(bcx: &BuildContext<'_, '_>, kind: CompileKind) -> CargoResult<O
             linker.definition
         );
     }
-    Ok(matching_linker.map(|(_k, linker)| linker.val.clone().resolve_program(bcx.gctx)))
+    if let Some(v) = matching_linker.map(|(_k, linker)| linker.val.clone().resolve_program(bcx.gctx)) {
+        return Ok(Some(v))
+    }
+    if bcx.target_data.short_name(&kind).starts_with("valida") {
+        return Ok(Some(PathBuf::from("/valida-toolchain/bin/ld.lld")))
+    }
+    return Ok(None)
 }

@@ -1934,6 +1934,12 @@ pub(crate) fn apply_env_config(
     gctx: &crate::GlobalContext,
     cmd: &mut ProcessBuilder,
 ) -> CargoResult<()> {
+    if !gctx.env_config()?.contains_key("CC_valida_unknown_baremetal_gnu") {
+        cmd.env("CC_valida_unknown_baremetal_gnu", "/valida-toolchain/bin/clang");
+    }
+    if !gctx.env_config()?.contains_key("CFLAGS_valida_unknown_baremetal_gnu") {
+        cmd.env("CFLAGS_valida_unknown_baremetal_gnu", "--sysroot=/valida-toolchain/ -isystem /valida-toolchain/include");
+    }
     for (key, value) in gctx.env_config()?.iter() {
         // never override a value that has already been set by cargo
         if cmd.get_envs().contains_key(key) {
