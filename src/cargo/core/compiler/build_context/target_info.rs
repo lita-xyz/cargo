@@ -868,10 +868,10 @@ fn rustflags_from_target(
         if target.starts_with("valida") {
             return Ok(Some(vec![
                 "-C".to_string(), "link-arg=/valida-toolchain/ValidaEntryPoint.o".to_string(),
+                "-C".to_string(), "link-arg=/valida-toolchain/io.o".to_string(),
                 "-C".to_string(), "link-arg=--script=/valida-toolchain/valida.ld".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/lib/valida-unknown-baremetal-gnu/libc.a".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/lib/valida-unknown-baremetal-gnu/libm.a".to_string(),
-                "-C".to_string(), "link-arg=--noinhibit-exec".to_string(),
             ]))
         }
         Ok(None)
