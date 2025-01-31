@@ -869,6 +869,7 @@ fn rustflags_from_target(
             return Ok(Some(vec![
                 "-C".to_string(), "link-arg=/valida-toolchain/ValidaEntryPoint.o".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/io.o".to_string(),
+                "-C".to_string(), "link-arg=/valida-toolchain/crypto.o".to_string(),
                 "-C".to_string(), "link-arg=--script=/valida-toolchain/valida.ld".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/lib/valida-unknown-baremetal-gnu/libc.a".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/lib/valida-unknown-baremetal-gnu/libm.a".to_string(),
