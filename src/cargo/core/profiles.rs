@@ -451,7 +451,7 @@ impl ProfileMaker {
             // codegen units. This ensures that we spend little time optimizing as
             // well as enabling parallelism by not constraining codegen units.
             profile.opt_level = InternedString::new("0");
-            profile.codegen_units = None;
+            profile.codegen_units = Some(1);
 
             // For build dependencies, we usually don't need debuginfo, and
             // removing it will compile faster. However, that can conflict with
@@ -722,6 +722,8 @@ impl Profile {
             name: InternedString::new("release"),
             root: ProfileRoot::Release,
             opt_level: InternedString::new("3"),
+            lto: Lto::Bool(true),
+            codegen_units: Some(1),
             trim_paths,
             ..Profile::default()
         }
