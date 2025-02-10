@@ -867,6 +867,9 @@ fn rustflags_from_target(
     if rustflags.is_empty() {
         if target.starts_with("valida") {
             return Ok(Some(vec![
+                "-C".to_string(), "linker-plugin-lto".to_string(),
+                "-C".to_string(), "linker=/valida-toolchain/bin/clang".to_string(),
+                "-C".to_string(), "link-arg=-flto".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/ValidaEntryPoint.o".to_string(),
                 "-C".to_string(), "link-arg=/valida-toolchain/io.o".to_string(),
                 "-C".to_string(), "link-arg=--script=/valida-toolchain/valida.ld".to_string(),
