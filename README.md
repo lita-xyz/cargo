@@ -127,3 +127,6 @@ See [LICENSE-THIRD-PARTY](LICENSE-THIRD-PARTY) for details.
 
 [1]: https://github.com/libgit2/libgit2
 
+## Issue reporting
+
+Any issues report at https://github.com/lita-xyz/valida-releases/issues
