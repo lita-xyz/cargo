@@ -722,7 +722,7 @@ impl Profile {
             name: InternedString::new("release"),
             root: ProfileRoot::Release,
             opt_level: InternedString::new("3"),
-            lto: Lto::Bool(true),
+            // lto: Lto::Bool(true), disabled for now because it makes reva not terminate
             codegen_units: Some(1),
             trim_paths,
             ..Profile::default()
